@@ -13,8 +13,12 @@ class Profile(models.Model):
     def __str__(self):
         return f"{self.user.username}'s Profile"
 
-    def save(self):
-        super().save()
+    def save_new(self, *args, **kwargs):
+        # this function causes a crash so
+        # had to change it's name to prevent
+        # an overwrite
+        super(Profile, self).save(*args, **kwargs)
+        # super.save(*args, **kwargs)
 
         img = Image.open(self.image.path)
 
